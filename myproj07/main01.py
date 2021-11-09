@@ -14,9 +14,7 @@ song_list = list(df.T.to_dict().values())
 def pick_like_value(song_dict):
     return song_dict("like")
 
-    # 목록(항상list)    #키
-
-sorted_song_list = sorted(song_list, key=pick_like_value, reverse=Ture):
+sorted_song_list = sorted(song_list, key=pick_like_value, reverse=True):
 top10_song_list = sorted_song_list[:10]
 
 for song_dict in sorted_song_list[:10]:
