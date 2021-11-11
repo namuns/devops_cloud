@@ -10,7 +10,7 @@ import tasks
 #    print("TELEGRAM_TOKEN 환경변수를 지정해주세요", file=sys.stderr)
 #    sys.exit(1) #종료 상태 값을 1로 지정하고 프로그램 종료하는 변수 0이 아니기 떄문에 오류로 규정하고 넘어감
 
-token = "2128680883:AAElqIKrXfpmZ6NPlshVsxfmRn8IPO6mWtM"
+token = "key"
 updater = Updater(token=token, use_context=True)
 dispatcher = updater.dispatcher
 
