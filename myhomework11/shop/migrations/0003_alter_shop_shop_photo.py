@@ -7,12 +7,12 @@ import shop.upload_to
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shop', '0002_shop_shop_price'),
+        ('shop', '0002_Shop_shop_price'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='shop',
+            model_name='board',
             name='Shop_photo',
             field=models.ImageField(blank=True, upload_to=shop.upload_to.uuid_name_upload_to, verbose_name='사진'),
         ),

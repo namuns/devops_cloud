@@ -1,26 +1,33 @@
-from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
-from shop.models import Shop
+from django.shortcuts import render
+from shop.models import Post
 
 
-def shop_list(request: HttpRequest) -> HttpResponse:
-    return render(request, "shop/shop_list.html")
+def index(request):
+    return render(request, "shop/index.html")
 
-    qs = Shop.objects.all() #QuerySet Tyoe
+
+def post_list(request: HttpRequest) -> HttpResponse:
+#    request.GET # QueryString Values
+#    request.POST # Post 요청 Value
+#    request.FILES # Post 요청에서 파일 value
+
+    qs = Post.objects.all() #QuerySet Tyoe
     qs = qs.order_by("-pk")
 
+    #request.GET은 쿼리의 값이 사전으로 저장 q는 검색누르면 주소창에 뜨는 ?q=검색어
     q = request.GET.get("q", "")
     if q:
-        qs = qs.filter(title__icontains=q)
+        qs = qs.filter(title__icontains=q) #i는 ignore이다. 대소문자 구별하나 안하나
 
-
-    return render(request, "shop/shop_list.html", {
-        "shop_list": qs,
+   # shop/templates/shop/post_list.html
+    return render(request, "shop/post_list.html", {
+        "post_list": qs,
     })
 
-def shop_detail(request: HttpRequest, pk: int) -> HttpResponse:
+def post_detail(request: HttpRequest, pk: int) -> HttpResponse:
     # pk = 1
-    shop = Shop.objects.get(pk=pk) # id도 가능
-    return render(request, "shop/shop_detail.html", {
-        "shop": shop,
+    post = Post.objects.get(pk=pk) # id도 가능
+    return render(request, "shop/post_detail.html", {
+        "post": post,
     })
