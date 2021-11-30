@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from market.views import post_list
+from market.views import index, post_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', post_list),
+    path('', index),
+    path('market/', post_list),
 ]
