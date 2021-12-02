@@ -18,11 +18,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from dogtube.views import index
+from dogtube.views import index, video_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dogtube/', index),
+    path("catube/<int:pk>/", video_detail),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
