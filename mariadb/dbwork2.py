@@ -130,7 +130,8 @@ def checkList():
     conn.close()
 
 # 검색
-def selectData():
+def selectData\
+                ():
     conn = None
     cur = None
 

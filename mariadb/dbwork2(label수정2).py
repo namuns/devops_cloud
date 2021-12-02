@@ -1,6 +1,9 @@
 import pymysql
+import tkinter
+import os
 from tkinter import *
 from tkinter import messagebox
+
 
 # 데이터베이스 연동 함수 선언
 def insertData():
@@ -26,7 +29,7 @@ def insertData():
 
     #SQL 쿼리만들기
     sql = ""
-    sql = "INSERT INTO nameTBL (code, name, price, sales, profit, pbr, dps) VALUES " \
+    sql = "INSERT INTO stockTBL (code, name, price, sales, profit, pbr, dps) VALUES " \
           "('" + code + "', '" + name + "', " + price + ", '" + sales + "', '" + profit + "',  '" + pbr + "', '" + dps + "')"
 
     print(sql)
@@ -54,8 +57,7 @@ def insertData():
     edt6.delete(0, "end")
     edt7.delete(0, "end")
 
-    # DB 접속 종료
-    conn.close()
+#def deleteData():
 
 
 # 프레임 이동( 메인화면으로 돌아가기)
@@ -63,7 +65,7 @@ def backFrame():
     editFrame.pack()
     listFrame.pack_forget()
 
-
+# 조회
 def checkList():
     conn = None
     cur = None
@@ -98,7 +100,7 @@ def checkList():
 
 
     # 회원 정보 select 기능 구현
-    sql = "SELECT code, name, price, sales, profit, pbr, dps from nameTBL ORDER BY code ASC"
+    sql = "SELECT code, name, price, sales, profit, pbr, dps from stockTBL ORDER BY code ASC"
     cur.execute(sql)
 
     while(True) :
@@ -140,6 +142,7 @@ def checkList():
 
     conn.close()
 
+# 검색
 def selectData():
     conn = None
     cur = None
@@ -175,7 +178,7 @@ def selectData():
 
 
     # 회원 정보 select 기능 구현
-    sql = "SELECT code, name, price, sales, profit, pbr, dps from nameTBL WHERE code ='"+code+"' ORDER BY code DESC"
+    sql = "SELECT code, name, price, sales, profit, pbr, dps from stockTBL WHERE code ='"+code+"' ORDER BY code DESC"
     cur.execute(sql)
 
     while(True) :
@@ -218,30 +221,53 @@ def selectData():
 
     conn.close()
 
+# 계산
+def calculate1():
+    conn = None
+    cur = None
 
-def calculate(selectData):  # 계산하는 함수
-    abc = float(edt6)
-    pri = float(edt3)
-    n = len(sql)
+    listFrame.pack(side=BOTTOM, fill=BOTH, expand=1)
 
-    try:
-        abc = float(selectData.edt3)
-        hhh = float(selectData.edt6)
-        BPSS = abc / (hhh * 100)
-        checkList.lable8.configure(text=str(BPSS))
-    except ValueError as err:
-        checkList.lable8.configure(text="에러입니다")
-        print(err)
+    lcode = []
+    # 데이터 베이스 접속
+    conn = pymysql.connect(host='127.0.0.1', user='root', password='1234', db='stock', charset='utf8')
+    # 이것은 커서이다.
+    cur = conn.cursor()
+    # 데이터 초기화
+    lcode.append("BPS 값")
+    lcode.append("======")
 
-# 영업이익률 = 영업이익/매출액x 100
-# 배당수익률 = DPS/price x 100
-# BPS = price/PBR
+    # 회원 정보 select 기능 구현
+    sql = "SELECT (pbr/price*100) AS 'BPS 구하기' from stocktbl ORDER BY code DESC"
+
+    cur.execute(sql)
+    while True:
+        row = cur.fetchone()
+
+        if row == None:
+            break
+        #
+        lcode.append(row[0])
+
+    listcode.delete(0, listcode.size() - 1)
+
+    for item1, in zip(lcode):
+        listcode.insert(END, item1)
+
+    conn.close()
+
 
 
 # GUI 화면 구성
-window = Tk()
-window.geometry("1500x300")
+window = tkinter.Tk()
+window.geometry("1550x800")
 window.title("영웅문")
+
+
+image=tkinter.PhotoImage(file="unnamed.png")
+
+label=tkinter.Label(window, image=image)
+label.pack()
 
 editFrame = Frame(window)
 editFrame.pack()
@@ -337,9 +363,14 @@ listdps.pack(side=LEFT, fill=BOTH, expand=1)
 btnBack = Button(listFrame, text="돌아가기", command=backFrame)
 btnBack.pack(side=LEFT, padx=10, pady=10)
 
-btnBpsCal = Button(listFrame, text="BPR 계산", command=calculate)
-btnBpsCal.pack(side=LEFT, padx=10, pady=10)
+btnBack = Button(listFrame, text="BPS 계산", command=calculate1)
+btnBack.pack(side=LEFT, padx=10, pady=10)
 
-# 이미지파일 임포트
+btnBack = Button(listFrame, text="적정주가 계산", command=calculate1)
+btnBack.pack(side=LEFT, padx=10, pady=10)
+
+
+#
 
 window.mainloop()
+

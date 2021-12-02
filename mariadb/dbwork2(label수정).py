@@ -63,6 +63,7 @@ def backFrame():
     editFrame.pack()
     listFrame.pack_forget()
 
+
 def checkList():
     conn = None
     cur = None
@@ -218,9 +219,28 @@ def selectData():
     conn.close()
 
 
+def calculate(selectData):  # 계산하는 함수
+    abc = float(edt6)
+    pri = float(edt3)
+    n = len(sql)
+
+    try:
+        abc = float(selectData.edt3)
+        hhh = float(selectData.edt6)
+        BPSS = abc / (hhh * 100)
+        checkList.lable8.configure(text=str(BPSS))
+    except ValueError as err:
+        checkList.lable8.configure(text="에러입니다")
+        print(err)
+
+# 영업이익률 = 영업이익/매출액x 100
+# 배당수익률 = DPS/price x 100
+# BPS = price/PBR
+
+
 # GUI 화면 구성
 window = Tk()
-window.geometry("1400x300")
+window.geometry("1500x300")
 window.title("영웅문")
 
 editFrame = Frame(window)
@@ -317,6 +337,9 @@ listdps.pack(side=LEFT, fill=BOTH, expand=1)
 btnBack = Button(listFrame, text="돌아가기", command=backFrame)
 btnBack.pack(side=LEFT, padx=10, pady=10)
 
-#
+btnBpsCal = Button(listFrame, text="BPR 계산", command=calculate)
+btnBpsCal.pack(side=LEFT, padx=10, pady=10)
+
+# 이미지파일 임포트
 
 window.mainloop()
