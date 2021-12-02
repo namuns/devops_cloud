@@ -23,7 +23,7 @@ from dogtube.views import index, video_detail
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dogtube/', index),
-    path("catube/<int:pk>/", video_detail),
+    path("dogtube/<int:pk>/", video_detail),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
