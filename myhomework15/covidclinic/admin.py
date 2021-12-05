@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from covidclinic.models import Clinic
+
+
+class ClinicAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Clinic, ClinicAdmin)
