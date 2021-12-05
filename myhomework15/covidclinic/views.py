@@ -3,13 +3,6 @@ from django.shortcuts import render
 from covidclinic.models import Clinic
 
 
-
-def index(request: HttpRequest) -> HttpResponse:
-    qs = Clinic.objects.all()
-    return render(request, "covidclinic/index.html", {
-        "clinic_list": qs,
-    })
-
 def clinic_list(request: HttpRequest) -> HttpResponse:
     qs = Clinic.objects.all()
 
@@ -28,3 +21,7 @@ def clinic_detail(request: HttpRequest, pk= int) -> HttpResponse:
         "clinic": clinic,
     }
     return render(request, "covidclinic/clinic_detail.html", context_data)
+
+def clinic_new(request: HttpRequest) -> HttpResponse:
+    if request.method == "GET":
+        return render(request, "covidclinic/")
