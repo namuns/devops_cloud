@@ -1,0 +1,15 @@
+{% extends "covidclinic/layout.html" %}
+{% block content %}
+    <h2>{{ clinic.name }}</h2>
+
+    <ul>
+        <li>주소: {{ clinic.address }} </li>
+        <li>Tel: {{ clinic.telephone }}</li>
+
+
+    </ul>
+
+    {{ clinic.afdp|linebreaks }}
+    <hr />
+
+{% endblock %}

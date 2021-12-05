@@ -2,10 +2,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from covidclinic.views import index
+from covidclinic.views import index, clinic_detail, clinic_list
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('covidclinic/', index),
+    path('covidclinic/', clinic_detail),
+    path('covidclinic/', clinic_list),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
