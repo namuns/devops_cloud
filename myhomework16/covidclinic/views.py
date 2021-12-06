@@ -1,3 +1,4 @@
+from django.db.models import query
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from covidclinic.models import Clinic
@@ -5,6 +6,11 @@ from covidclinic.models import Clinic
 
 def clinic_list(request: HttpRequest) -> HttpResponse:
     qs = Clinic.objects.all()
+
+    query = request.GET.get("query", "")
+    if query:
+        qs = qs.filter(name__icontains=query)
+
     context_data = {
         "clinic_list": qs,
     }
