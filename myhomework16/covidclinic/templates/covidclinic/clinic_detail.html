@@ -1,0 +1,18 @@
+{% extends "covidclinic/layout.html" %}
+
+{% block content %}
+<h2>{{ clinic.name }}</h2>
+
+    <ul>
+        <li>주소: {{ clinic.address }}</li>
+        <li>전화번호: {{ clinic.telephone }}</li>
+        <li>평일 운영시간: {{ clinic.weekdaytime }}</li>
+        <li>토요일 운영시간: {{ clinic.sattime }}</li>
+        <li>주말 운영시간: {{ clinic.hdaytime }}</li>
+        <li>관할보건소: {{ clinic.controlcenter }}</li>
+        <li>관할보건소 전화번호: {{ clinic.centertel }}</li>
+        <li>장애인 편의사항: {{ clinic.afdp }}</li>
+    </ul>
+    <hr/>
+    <a href="/covidclinic/">목록으로</a>
+{% endblock %}
