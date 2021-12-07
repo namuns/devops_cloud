@@ -3,12 +3,33 @@
 {% block content %}
 
     <h2>{{ post.title }}</h2>
+    <p>
+        Tag:
+        {% for tag in tag_list %}
+            <span class="badge bg-success">
+                {{ tag.name }}
+            </span>
+        {% endfor %}
 
-    <img src="{{ post.photo.url }}" alt="{{ post.title }}" />
+
+    </p>
+
+    <img src="{{ post.photo.url }}" alt="{{ post.title }}"/>
 
     {{ post.content|linebreaks }}
 
-    <hr />
+    <h3>댓글</h3>
+    <ul>
+        {% for comment in comment_list %}
+            <li>
+                {{ comment.message }}
+                {{ comment.author_name }}
+                {{ comment.created_at }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <hr/>
 
     <a href="{% url "diary:post_list" %}">
         목록으로
