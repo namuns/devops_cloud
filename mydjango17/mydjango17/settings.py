@@ -23,6 +23,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # third apps
+    # local apps
+    'diary',
+
+
 ]
 
 if DEBUG:
