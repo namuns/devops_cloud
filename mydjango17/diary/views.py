@@ -9,3 +9,12 @@ def post_list(request: HttpRequest) -> HttpResponse:
     return render(request, "diary/post_list.html", {
         "post_list": qs,
     })
+
+
+def post_detail(request: HttpRequest, pk: int) -> HttpResponse:
+    post = Post.objects.get(pk=pk)
+    return render(request, "diary/post_detail.html", {
+        "post": post,
+    })
+
+
