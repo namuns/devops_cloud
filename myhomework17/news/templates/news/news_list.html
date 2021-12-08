@@ -1,0 +1,20 @@
+{% block content %}
+
+    <form action="" method="get">
+        <input type="text" name="query" value="{{ request.GET.query }}"/>
+        <input type="submit" value="검색" />
+    </form>
+
+    <ul>
+        {% for news in news_list %}
+            <li>
+                <a href="{% url "news:news_detail" news.pk %}"></a>
+
+                {{ news.title }}
+            </li>
+
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}

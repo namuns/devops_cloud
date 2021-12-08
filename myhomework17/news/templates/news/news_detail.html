@@ -1,0 +1,12 @@
+{% block content %}
+<h2>{{ news.title }}</h2>
+    <img src="{{ news.photo.url }}" alt="{{ news.title }}">
+
+    {{ news.content|linebreaks }}
+    <hr />
+
+
+    <a href="{% url "news:news_list" %}">
+    목록으로
+    </a>
+{% endblock %}
