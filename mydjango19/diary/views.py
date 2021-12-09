@@ -1,6 +1,7 @@
 from django.http import HttpResponse, HttpRequest
 from django.shortcuts import render
 
+from diary.forms import PostForm
 from diary.models import Post
 
 
@@ -33,4 +34,11 @@ def tag_detail(request: HttpRequest, tag_name: str) -> HttpResponse:
     return render(request, "diary/tag_detail.html", {
         "tag_name": tag_name,
         "post_list": qs,
+    })
+
+
+def post_new(request: HttpRequest) -> HttpResponse:
+    form = PostForm()
+    return render(request, "diary/post_form.html", {
+        "form": form,
     })
