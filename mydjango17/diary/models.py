@@ -19,6 +19,10 @@ class Post(TimestampedModel):
     def __str__(self) -> str:
         return self.title
 
+    def content_length(self) :
+        return len(self.content)
+    content_length.short_description = "메세지 글자수"
+
     class Meta:
         verbose_name = "포스팅"
         verbose_name_plural = "포스팅 목록"
