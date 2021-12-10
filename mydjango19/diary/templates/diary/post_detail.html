@@ -19,12 +19,17 @@
     {{ post.content|linebreaks }}
 
     <h3>댓글</h3>
+
+    <a href="{% url "diary:comment_new" post.pk %}">댓글 쓰기</a>
+
     <ul>
         {% for comment in comment_list %}
             <li>
-                {{ comment.message }}
-                {{ comment.author_name }}
-                {{ comment.created_at }}
+                <b>작성자:</b> {{ comment.author_name }}
+                <span>title={{ comment.created_at|timesince }} 전</span>
+                <b><br>내용: </b>{{ comment.message }}
+
+                <a href="{% url "diary:comment_edit" post.pk comment.pk %}">Edit</a>
             </li>
         {% endfor %}
     </ul>

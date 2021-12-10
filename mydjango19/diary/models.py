@@ -25,7 +25,7 @@ class Post(TimestampedModel):
 
 
     def __str__(self) -> str:
-        return self.title
+        return f"[{self.pk}] {self.title}"
 
     class Meta:
         verbose_name = "포스팅"
