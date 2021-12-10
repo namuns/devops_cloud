@@ -1,0 +1,8 @@
+__pycache__
+db.sqllite3
+media
+.idea
+.vscode
+.ipynb*
+.ipynb
+venv
