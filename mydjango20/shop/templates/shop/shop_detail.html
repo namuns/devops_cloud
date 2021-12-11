@@ -6,10 +6,22 @@
 
     {{ shop.description }}
 
-    <hr/>
+
     {{ shop.created_at|timesince }} 전에 등록
     <br>
 
+
+    <ul>
+        {% for review in review_list %}
+            <li>
+                <b>작성자:</b> {{ review.author_name }}
+                <b>내용: </b>{{ review.message }}
+                <span><b>작성시간: </b>{{ review.created_at|timesince }} 전</span>
+
+            </li>
+        {% endfor %}
+    </ul>
+       <hr/>
     <a href=" {% url "shop:shop_list" %}">
     목록
     </a>

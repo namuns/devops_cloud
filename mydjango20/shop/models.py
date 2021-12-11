@@ -29,6 +29,10 @@ class Review(TimestampedModel):
     author_name = models.CharField(max_length=20)
     message = models.TextField()
 
+    class Meta:
+        verbose_name = "리뷰"
+        verbose_name_plural = "리뷰 목록"
+
 
 class Tag(TimestampedModel):
     name = models.CharField(max_length=100, unique=True)

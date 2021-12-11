@@ -1,0 +1,12 @@
+{% extends "shop/layout.html" %}
+
+{% block content %}
+
+    <h2>review Form</h2>
+
+    <form action="" method="shop" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="submit" value="저장하기" class="btn-primary" />
+    </form>
+
+{% endblock %}
