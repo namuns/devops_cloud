@@ -2,9 +2,20 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from shop.forms import ShopForm
 
-
 # /shop/100/
 from shop.models import Shop
+
+
+def shop_list(request: HttpRequest) -> HttpResponse:
+    qs = Shop.objects.all()
+
+    query = request.GET.get("query", "")
+    if query:
+        qs = qs.filter(title__icontains=query)
+
+    return render(request, "shop/shop_list.html", {
+        "shop_list": qs,
+    })
 
 
 def shop_detail(request: HttpRequest, pk: int) -> HttpResponse:
@@ -29,3 +40,7 @@ def shop_new(request: HttpRequest) -> HttpResponse:
     return render(request, "shop/shop_form.html", {
         "form": form,
     })
+
+
+def shop_edit(request: HttpRequest) -> HttpResponse:
+    pass
