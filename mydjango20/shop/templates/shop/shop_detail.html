@@ -18,6 +18,8 @@
                 <b>내용: </b>{{ review.message }}
                 <span><b>작성시간: </b>{{ review.created_at|timesince }} 전</span>
 
+                <a href="{% url "shop:review_edit" shop.pk review.pk %}">Edit</a>
+
             </li>
         {% endfor %}
     </ul>
