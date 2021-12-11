@@ -4,19 +4,15 @@
 
     <h2>{{ shop.name }}</h2>
 
-    {{ shop.description }}
 
-
-    {{ shop.created_at|timesince }} 전에 등록
-    <br>
-
-
+    {{ shop.description|linebreaks   }}
+    {{ shop.created_at|timesince }} 전에 글 등록
     <ul>
         {% for review in review_list %}
             <li>
                 <b>작성자:</b> {{ review.author_name }}
                 <b>내용: </b>{{ review.message }}
-                <span><b>작성시간: </b>{{ review.created_at|timesince }} 전</span>
+                <b>{{ review.created_at|timesince }} 전</b>
 
                 <a href="{% url "shop:review_edit" shop.pk review.pk %}">Edit</a>
 

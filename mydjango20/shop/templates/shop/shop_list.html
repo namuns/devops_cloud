@@ -1,17 +1,29 @@
 {% extends "shop/layout.html" %}
 
 {% block content %}
-    <ul>
+
+
+
+    <div class="row" style="margin-top: 2em;">
         {% for shop in shop_list %}
-            <li>
+            <div class="col-sm-6 offset-sm-3" style="margin-bottom: 2em;">
+                <div class="card">
+                    <img src="{{ post.photo.url }}"
+                         alt="{{ post.title }}"
+                         class="card-ing-top"/>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        {{ post.content|truncatewords:23 }}
 
+                        <a href="{% url "shop:shop_detail" shop.pk %}">
+                            {{ shop.name }}
+                        </a>
 
-                <a href="{% url "shop:shop_detail" shop.pk %}">
-                    {{ shop.name }}
-                </a>
-
-            </li>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-    </ul>
-    
+    </div>
+    <hr/>
+
 {% endblock %}

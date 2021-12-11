@@ -1,5 +1,5 @@
 {% extends "shop/layout.html" %}
-
+{% load bootstrap5 %}
 {% block content %}
     <h2>Shop Form</h2>
 
@@ -8,6 +8,7 @@
             <table>
                 {{ form.as_table }}
             </table>
+        {% bootstrap_form form %}
 
         <input type="submit" value="저장하기"/>
     </form>

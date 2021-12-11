@@ -11,7 +11,7 @@ def shop_list(request: HttpRequest) -> HttpResponse:
 
     query = request.GET.get("query", "")
     if query:
-        qs = qs.filter(title__icontains=query)
+        qs = qs.filter(name__icontains=query)
 
     return render(request, "shop/shop_list.html", {
         "shop_list": qs,
