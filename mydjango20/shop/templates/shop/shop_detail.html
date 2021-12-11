@@ -9,8 +9,13 @@
     <hr/>
     {{ shop.created_at|timesince }} 전에 등록
     <br>
+
     <a href=" {% url "shop:shop_list" %}">
     목록
+    </a>
+
+    <a href="{% url "shop:shop_edit" shop.pk %}">
+    수정하기
     </a>
 
 {% endblock %}
