@@ -22,10 +22,12 @@ def shop_detail(request: HttpRequest, pk: int) -> HttpResponse:
     shop = get_object_or_404(Shop, pk=pk)
 
     review_list = shop.review_set.all()
+    tag_list = shop.tag_set.all()
 
     return render(request, "shop/shop_detail.html", {
         "shop": shop,
         "review_list": review_list,
+        "tag_list": tag_list,
     })
 
 
@@ -90,4 +92,14 @@ def review_edit(request, shop_pk: int, pk: int) -> HttpResponse:
 
     return render(request, "shop/review_form.html", {
         "form": form,
+    })
+
+
+
+def tag_detail(request: HttpRequest, tag_name: str) -> HttpResponse:
+    qs = Shop.objects.all()
+    qs = qs.filter(tag_set__name=tag_name)
+    return render(request, "shop/tag_detail.html", {
+        "tag_name": tag_name,
+        "shop_list": qs,
     })

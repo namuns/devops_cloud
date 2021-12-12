@@ -2,11 +2,32 @@
 
 {% block content %}
 
-    <h2>{{ shop.name }}</h2>
+    <div class="container">
+        {% for tag in tag_list %}
+            <a href="{%  url "shop:tag_detail" tag.name %}" class="badge bg-success">
+                {{ tag.name }}
+            </a>
+        {% endfor %}
+    </div>
 
-
-    {{ shop.description|linebreaks   }}
+<div class="container">
+<div class="card text-center" style="width: 60rem;" >
+  <div class="card-header">
+    <b>{{ shop.name }}</b>
+  </div>
+  <div class="card-body my-auto">
+    <h5 class="card-title"></h5>
+    <p class="card-text">{{ shop.description }}</p>
+  </div>
+  <div class="card-footer text-muted">
     {{ shop.created_at|timesince }} 전에 글 등록
+
+  </div>
+</div>
+</div>
+
+
+    <div class="container">
     <ul>
         {% for review in review_list %}
             <li>
@@ -20,14 +41,17 @@
         {% endfor %}
     </ul>
        <hr/>
-    <a href=" {% url "shop:shop_list" %}">
+    </div>
+
+    <div class="container">
+    <a href=" {% url "shop:shop_list" %}" class="btn btn-secondary btn-md round">
     목록
     </a>
 
-    <a href="{% url "shop:shop_edit" shop.pk %}">
+    <a href="{% url "shop:shop_edit" shop.pk %}" class="btn btn-secondary btn-md round">
     수정하기
     </a>
-
+    </div>
 {% endblock %}
 
 
