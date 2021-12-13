@@ -16,6 +16,7 @@
 <ul>
     {% for shop in shop_list %}
         <li>
+            <a href="{% url "shop:shop_detail" shop.pk %}"></a>
             {{ shop.name }}
         </li>
 

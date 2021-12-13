@@ -18,3 +18,8 @@ def shop_list(request: HttpRequest) -> HttpResponse:
     })
 
 
+def shop_detail(request: HttpRequest, pk:int) -> HttpResponse:
+    shop = Shop.objects.get(pk=pk)
+    return render(request, "shop/shop_detail.html", {
+        "shop" : shop,
+    })
