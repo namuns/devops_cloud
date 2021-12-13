@@ -8,14 +8,12 @@ class ShopAdmin(admin.ModelAdmin):
     pass
 
 
-
 @admin.register(Category)
 class ShopAdmin(admin.ModelAdmin):
     pass
 
 
-
 @admin.register(Tag)
-class ShopAdmin(admin.ModelAdmin):
+class TagAdmin(admin.ModelAdmin):
     pass
 
