@@ -1,0 +1,24 @@
+{% extends "shop/layout.html" %}
+{% block content %}
+
+    <h2>{{ shop.name }}</h2>
+
+    <p>
+    {% for tag in tag_list %}
+        <span class="badge bg-success"><{{ tag.name }}/span>
+        {% endfor %}
+    </p>
+
+    {{ shop.desctiption }}
+
+    <hr/>
+    {{ shop.create_at|timesince }}전에 생성.
+    <hr/>
+    <a href="" class="btn btn-danger">수정</a>
+
+    <hr/>
+    <a href="{% url "shop:shop_list" %}" class="btn btn-primary">
+    목록으로
+    </a>
+
+{% endblock %}
