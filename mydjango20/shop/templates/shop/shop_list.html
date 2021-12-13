@@ -2,20 +2,35 @@
 
 {% block content %}
 
-    <ul>
-        <li>
-            <a href="?category_id=">
-                전체
-            </a>
-        </li>
-        {% for category in category_list %}
-            <li>
-                <a href="?category_id={{ category.pk }}">
-                    {{ category.name }}
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="row">
+        <div class="col-sm-8">
+
+
+
+        </div>
+        <div class="col-sm-4">
+            <div class="">
+                <a href="{% url "shop:shop_new" %}" class="btn btn-primary">새 포스팅 쓰기</a>
+
+            </div>
+            <ul>
+                <li>
+                    <a href="?category_id=">
+                        전체
+                    </a>
+                </li>
+                {% for category in category_list %}
+                    <li>
+                        <a href="?category_id={{ category.pk }}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
 
     <div class="row" style="margin-top: 2em;">
         {% for shop in shop_list %}
