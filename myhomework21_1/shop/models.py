@@ -11,7 +11,7 @@ class TimestampedModel(models.Model):
 
 
 class Shop(TimestampedModel):
-    name = models.CharField(max_length=100, db_index=True)
+    name = models.CharField(max_length=10, db_index=True)
     description = models.TextField(blank=True)
     telephone = models.CharField(max_length=14,
                                  validators=[
