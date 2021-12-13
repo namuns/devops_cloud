@@ -20,9 +20,25 @@
                         </a>
 
                     </li>
+                    <li>
+                        <a href="?category_id={{ category.pk }}">
+
+                            {{ category.name }}
+                        </a>
+
+
+                    </li>
+
                 {% endfor %}
                 <div class="col-sm-4">
+                    <ul>
+                        {% for category in category_list %}
+                            <li>
+                                {{ category.name }}
 
+                            </li>
+                        {% endfor %}
+                    </ul>
 
                 </div>
 
