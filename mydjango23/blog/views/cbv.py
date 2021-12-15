@@ -49,7 +49,7 @@ post_edit = PostUpdateView.as_view(
     # success_url="/blog/",
     # success_url="blog:post_list", # successUrl은 URL reverse 미지원
     # success_url=reverse("blog:post_list"), #
-    success_url=reverse_lazy("blog:post_list"),
+    # success_url=reverse_lazy("blog:post_list"),
 )
 
 post_delete = DeleteView.as_view(
