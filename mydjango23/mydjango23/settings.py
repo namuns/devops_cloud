@@ -29,8 +29,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # third apps
-    'bootstrap5'
+    'bootstrap5',
     # local apps
+    'blog',
 ]
 
 if DEBUG:
