@@ -1,7 +1,6 @@
 from django.contrib import admin
-
-from shop.forms import ShopForm
 from shop.models import Shop, Category, Tag
+from shop.forms import ShopForm
 
 
 @admin.register(Shop)
@@ -10,11 +9,10 @@ class ShopAdmin(admin.ModelAdmin):
 
 
 @admin.register(Category)
-class ShopAdmin(admin.ModelAdmin):
-    pass
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ["name"]
 
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    pass
-
+    list_display = ["name"]

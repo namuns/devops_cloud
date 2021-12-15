@@ -3,13 +3,14 @@
 
 {% block content %}
 
+    <h2>Shop Form</h2>
+
     <form action="" method="post">
 
-    {% csrf_token %}
-    {% bootstrap_form form %}
-    <input type="submit" value="저장하기">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input type="submit" value="저장하기">
 
     </form>
-
 
 {% endblock %}
