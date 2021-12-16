@@ -69,4 +69,4 @@ class SubscriberForm(forms.ModelForm):
         if phone:
             if not phone.startswith("010"):
                 raise forms.ValidationError("010으로 시작토록 입력해주세요.")
-        return phone
+        return phone.replace("-", "")
