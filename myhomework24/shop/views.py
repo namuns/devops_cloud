@@ -2,17 +2,21 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from shop.forms import ShopForm, CommentForm
-from shop.models import Shop, Comment, Tag
+from shop.models import Shop, Comment, Tag, Category
 
 
 def shop_list(request: HttpRequest) -> HttpResponse:
-
+    category_qs = Category.objects.all()
     qs = Shop.objects.all()
+    category_id: str = request.GET.get("category_id", "")
+    if category_id:
+        qs = qs.filter(category__pk=category_id)
     query = request.GET.get("query", "")
     if query:
         qs = qs.filter(name__icontains=query)
     return render(request, "shop/shop_list.html", {
         "shop_list": qs,
+        "category_list": qs,
     })
 
 def shop_new(request: HttpRequest) -> HttpResponse:

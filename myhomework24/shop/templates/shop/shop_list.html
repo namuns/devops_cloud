@@ -4,6 +4,18 @@
 {% block content %}
     <h2>ShopList</h2>
 
+    <ul>
+        {% for category in category_list %}
+            <li>
+                <a href="?category_id=">전체</a>
+                <a href="?category_id={{ category.pk }}">
+                    {{ category.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+
     <div class="row">
         <div class="col-sm-8">컨텐츠</div>
         <div class="col-sm-4">사이드바</div>

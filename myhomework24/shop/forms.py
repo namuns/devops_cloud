@@ -7,15 +7,13 @@ class ShopForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
         if self.instance.pk:
             tag_qs = self.instance.tag_set.all()
             tags = ", ".join([tag.name for tag in tag_qs])
             self.fields["tags"].initial = tags
 
-    def save(self):
-        saved_post = super().save()
-
+    def _save_m2m(self):
+        saved_shop = super()._save_m2m()
         tag_list = []
         tags = self.cleaned_data.get("tags", "")
         for word in tags.split(","):
@@ -23,10 +21,8 @@ class ShopForm(forms.ModelForm):
             tag, __ = Tag.objects.get_or_create(name=tag_name)
             tag_list.append(tag)
 
-            saved_post.tag_set.add(*tag_list)
-            saved_post.tag_set.clear()
-
-            return saved_post
+        self.instance.tag_set.clear()
+        self.instance.tag_set.add(*tag_list)
 
     class Meta:
         model = Shop
