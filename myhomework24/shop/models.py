@@ -23,6 +23,8 @@ class Category(TimeStampedModel):
 class Shop(TimeStampedModel):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, db_index=True)
+    description = models.TextField(blank=True)
+    photo = models.ImageField(upload_to="blog/post/%Y/%m/%d")
     telephone = models.CharField(
         max_length=14,
         validators=[

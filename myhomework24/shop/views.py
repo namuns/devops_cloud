@@ -1,5 +1,5 @@
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from shop.forms import ShopForm
 from shop.models import Shop
@@ -27,4 +27,12 @@ def shop_new(request: HttpRequest) -> HttpResponse:
 
     return render(request, "shop/shop_form.html", {
         "form": form,
+    })
+
+
+def shop_detail(request: HttpRequest, pk: int) -> HttpResponse:
+    shop = get_object_or_404(Shop, pk=pk)
+
+    return render(request, "shop/shop_detail.html", {
+        "shop": shop,
     })
