@@ -36,3 +36,18 @@ def shop_detail(request: HttpRequest, pk: int) -> HttpResponse:
     return render(request, "shop/shop_detail.html", {
         "shop": shop,
     })
+
+
+def shop_edit(request: HttpRequest, pk: int) -> HttpResponse:
+    shop = get_object_or_404(Shop, pk=pk)
+
+    if request.method == "POST":
+        form = ShopForm(request.POST, request.FILES, instance=Shop)
+
+    else:
+        form = ShopForm(instance=shop)
+
+    return render(request, "shop/shop_form.html", {
+        "form": form,
+    })
+
