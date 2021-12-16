@@ -2,6 +2,15 @@
 
 {% block content %}
 
+
+    <div class="container">
+    Tag:
+        {% for tag in shop.tag_set.all %}
+            <span class="badge bg-info">{{ tag.name }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="container">
     <h2>{{ shop.name }}</h2>
     <img src="{{ shop.photo.url }}" alt="{{ shop.name }}"/>
     <li>
@@ -11,7 +20,7 @@
     <hr/>
     {{ shop.created_at|timesince }}전에 등록
 
-
+    </div>
     <ul>
         {% for comment in comment_list %}
             <li>

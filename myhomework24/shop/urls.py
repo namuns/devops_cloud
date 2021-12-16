@@ -11,5 +11,6 @@ urlpatterns = [
     path("<int:pk>/edit", views.shop_edit, name="shop_edit"),
     path("<int:shop_pk>/comment/new/", views.comment_new, name="comment_new"),
     path("<int:shop_pk>/comment/<int:pk>/edit", views.comment_edit, name="comment_edit"),
+    path("tag/<str:shop_pk>/", views.tag_detail, name="tag_detail"),
 
 ]

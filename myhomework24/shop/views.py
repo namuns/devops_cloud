@@ -2,7 +2,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from shop.forms import ShopForm, CommentForm
-from shop.models import Shop, Comment
+from shop.models import Shop, Comment, Tag
 
 
 def shop_list(request: HttpRequest) -> HttpResponse:
@@ -21,6 +21,7 @@ def shop_new(request: HttpRequest) -> HttpResponse:
         form = ShopForm(request.POST, request.FILES)
         if form.is_valid():
             saved_post = form.save()
+
             return redirect("shop:shop_detail", saved_post.pk)
     else:
         form = ShopForm()
@@ -33,10 +34,12 @@ def shop_new(request: HttpRequest) -> HttpResponse:
 def shop_detail(request: HttpRequest, pk: int) -> HttpResponse:
     shop = get_object_or_404(Shop, pk=pk)
     comment_list = shop.comment_set.all()
+    tag_list = shop.tag_set.all()
 
     return render(request, "shop/shop_detail.html", {
         "shop": shop,
         "comment_list": comment_list,
+        "tag_list": tag_list,
     })
 
 
@@ -84,4 +87,13 @@ def comment_edit(request, shop_pk: int, pk: int) -> HttpResponse:
 
     return render(request, "shop/comment_form.html", {
         "form": form,
+    })
+
+
+def tag_detail(request: HttpRequest, tag_name: str) -> HttpResponse:
+    qs = Shop.objects.all()
+    qs = qs.filter(tag_set__name=tag_name)
+    return render(request, "shop/tag_detail.html", {
+        "tag_name": tag_name,
+        "shop_list": qs,
     })
