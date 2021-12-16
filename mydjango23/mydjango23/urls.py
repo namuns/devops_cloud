@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
     # 아래의 url 설정은 기능 구현 후에 pattern_name 으로 변경예정
+    path('accounts/', include('accounts.urls')),
     path('', RedirectView.as_view(url='/blog/'), name='root'),
 ]
 
