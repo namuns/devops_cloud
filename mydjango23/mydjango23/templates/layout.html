@@ -6,10 +6,12 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>남문수의 블로그</title>
+    <title>{% block page_title %}남문수의 블로그{% endblock %}</title>
 
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
+
+        {% block extra_head %}
+        {% endblock %}
+
 </head>
 <body>
 <div class="container">
@@ -31,6 +33,8 @@
 
     {% block content %}{% endblock %}
 
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
     <hr/>
     &copy; 2021.12.15. 남문수 컴퍼니.
 </div>
