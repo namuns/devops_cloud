@@ -10,6 +10,20 @@
     {{ shop.description }}
     <hr/>
     {{ shop.created_at|timesince }}전에 등록
+
+
+    <ul>
+        {% for comment in comment_list %}
+            <li>
+                <b>작성자:</b> {{ comment.post }}
+                <b>내용: </b>{{ comment.message }}
+                <span><b>작성시간: </b>{{ comment.created_at|timesince }} 전</span>
+                <a href="{% url "shop:comment_new" shop.pk %}">댓글쓰기</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <hr/>
+
     <ul>
         <a href="{% url "shop:shop_list" %}">목록으로</a>
         <a href="{% url "shop:shop_edit" shop.pk %}">수정하기</a>
