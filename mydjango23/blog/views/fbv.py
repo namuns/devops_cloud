@@ -8,6 +8,17 @@ from blog.models import Post
 
 def post_list(request: HttpRequest) -> HttpResponse:
     post_qs = Post.objects.all()
+
+    format = request.GET.get("format", "")
+
+    if format == "xlsx":
+        tabular_data = Post.get_tabular_data(post_qs, format="xlsx")
+        return HttpResponse(tabular_data, content_type="application/vnd.ms-excel")
+    elif format == "json":
+        tabular_data = Post.get_tabular_data(post_qs, format="json")
+        return HttpResponse(tabular_data, content_type="application/json")
+
+
     return render(request, 'blog/post_list.html', {
         'post_list': post_qs,
     })
