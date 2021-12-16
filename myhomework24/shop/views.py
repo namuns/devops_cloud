@@ -2,7 +2,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from shop.forms import ShopForm, CommentForm
-from shop.models import Shop
+from shop.models import Shop, Comment
 
 
 def shop_list(request: HttpRequest) -> HttpResponse:
@@ -66,6 +66,21 @@ def comment_new(request: HttpRequest, shop_pk: int) -> HttpResponse:
             return redirect("shop:post_detail", shop_pk)
     else:
         form = ()
+
+    return render(request, "shop/comment_form.html", {
+        "form": form,
+    })
+
+
+def comment_edit(request, shop_pk: int, pk: int) -> HttpResponse:
+    comment = get_object_or_404(Comment, pk=pk)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST, request.FILES, instance=comment)
+        if form.is_valid():
+            return redirect("shop:shop_detail", shop_pk)
+    else:
+        form = CommentForm(instance=comment)
 
     return render(request, "shop/comment_form.html", {
         "form": form,

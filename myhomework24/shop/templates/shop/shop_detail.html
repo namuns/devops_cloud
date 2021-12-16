@@ -18,7 +18,9 @@
                 <b>작성자:</b> {{ comment.post }}
                 <b>내용: </b>{{ comment.message }}
                 <span><b>작성시간: </b>{{ comment.created_at|timesince }} 전</span>
+                <a href="{% url "shop:comment_edit" shop.pk comment.pk %}">댓글수정</a>
                 <a href="{% url "shop:comment_new" shop.pk %}">댓글쓰기</a>
+
             </li>
         {% endfor %}
     </ul>
