@@ -1,5 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render
+from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -10,9 +10,9 @@ signup = CreateView.as_view(
     template_name="accounts/signup_form.html"
 )
 
-
-def login(request):
-    pass
+login = LoginView.as_view(
+    template_name="accounts/login_form.html",
+)
 
 
 def profile(request):
