@@ -1,4 +1,4 @@
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 from shop.models import Shop, Category
 
@@ -13,5 +13,10 @@ class ShopListView(ListView):
 
 
 shop_list = ShopListView.as_view(
+    model=Shop,
+)
+
+
+shop_detail = DetailView.as_view(
     model=Shop,
 )
