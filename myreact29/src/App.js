@@ -1,13 +1,13 @@
 // import Counter from "Counter";
 // import MelonTop100 from "MelonTop100";
-
+import ReactDOM from 'react-dom';
 import MelonSearch from "MelonSearch";
 
 function App() {
   return (
   <div>
     <h1>안녕 리액트</h1>
-    <MelonSearch />
+      <MelonSearch />
     {/* <MelonTop100 />
     <Counter />
     <Counter />
