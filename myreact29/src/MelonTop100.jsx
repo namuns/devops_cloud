@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import initialSongList from 'data/melon_data.json';
+import 'MelonTop100.css';
 
 function MelonTop100() {
   const [songList, setSongList] = useState([]);
@@ -11,13 +12,14 @@ function MelonTop100() {
     <div>
       <h2>멜론 top 100</h2>
       <button onClick={handleClick}>로딩</button>
-      <ul>
+      <ul className="songList">
         {songList.map((song) => {
-          return <li>{song.title}</li>;
+          return (
+            <li>
+              {song.rank} {song.title} by {song.artist} {song.like}
+            </li>
+          );
         })}
-        <li>제목1</li>
-        <li>제목2</li>
-        <li>제목3</li>
       </ul>
     </div>
   );
