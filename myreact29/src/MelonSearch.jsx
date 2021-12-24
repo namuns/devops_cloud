@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Input, List, Avatar } from 'antd';
+import { Input, List, Avatar, notification, Typography } from 'antd';
 
 import Axios from 'axios';
 import jsonpAdaptor from 'axios-jsonp';
@@ -35,7 +35,7 @@ function MelonSearch() {
       .then((response) => {
         //ALBUMCONTENTS, ARTISTCONTENTS 가능
         const {
-          data: { SONGCONTENTS: searchedSongList },
+          data: { SONGCONTENTS: searchedSongList = [] },
         } = response;
         console.group('멜론 검색결과');
         console.log(response);
@@ -43,19 +43,23 @@ function MelonSearch() {
         console.groupEnd();
 
         setSongList(searchedSongList);
+
+        notification.info({
+          message: '멜론검색',
+          description: `${searchedSongList.length}개의 노래 검색결과가 있습니다.`,
+        });
       })
       .catch((error) => {
         console.group('멜론 검색 에러');
         console.error(error);
         console.groupEnd();
+        notification.error({
+          message: '멜론 검색 에러',
+          // 주의: 유저친화적인 에러메세지는 아닙니다.
+          description: JSON.stringify(error),
+        });
       });
   };
-
-  const list = [
-    {
-      title: '',
-    },
-  ];
 
   return (
     <div style={{ width: 300, margin: '0 auto' }}>
@@ -66,24 +70,29 @@ function MelonSearch() {
         onChange={handleChange}
         onPressEnter={handlePressEnter}
       />
-      {songList.map((song) => {
-        return (
-          <List
-            itemLayout="horizontal"
-            size="large"
-            dataSource={list}
-            renderItem={() => (
-              <List.Item>
-                <List.Item.Meta
-                  avatar={<Avatar src={song.ALBUMIMG} />}
-                  title={song.SONGNAME}
-                  description={song.ARTISTNAME}
-                />
-              </List.Item>
-            )}
-          />
-        );
-      })}
+      <List
+        bordered={false}
+        dataSource={songList}
+        renderItem={(song) => (
+          <List.Item>
+            <List.Item.Meta avatar={<Avatar src={song.ALBUMIMG} />} />
+
+            <Typography.Text
+              onClick={() => {
+                console.log(`clicked ${JSON.stringify(song)}`);
+              }}
+            >
+              <a
+                href={`https://www.melon.com/song/detail.htm?songId=${song.SONGID}`}
+                target={'_blank'}
+              >
+                {song.SONGNAME}
+              </a>
+              - {song.ARTISTNAME}
+            </Typography.Text>
+          </List.Item>
+        )}
+      />
     </div>
   );
 }
