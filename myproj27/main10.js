@@ -13,3 +13,22 @@ const filter_song = song_array.filter(
     );
 
 console.log(filter_song);
+
+
+
+
+
+Array.prototype.sum = function () {
+    return this.reduce((acc, element) => {
+        return acc + element;
+    }, 0);
+};
+
+const result = song_array
+    .filter(
+        ({ artist }) => artist === "방탄소년단"
+    )
+    .map(({ like }) => like)
+    .sum();
+
+console.log("result :", result);

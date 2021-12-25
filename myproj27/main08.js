@@ -8,7 +8,7 @@ const { melon_data: song_array, melon_data } = require("./melon_data");
 
 
 const filter_song = song_array.filter(
-    (song => song.title.includes("사랑"))
+    (song) => song.title.includes("사랑")
 ).map(
     ({ title }) => title
 );
