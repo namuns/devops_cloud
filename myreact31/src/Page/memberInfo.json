@@ -1,0 +1,31 @@
+[
+    {
+        "member": "member1",
+        "name": "Jane",
+        "role": "UI/UX INTERACTIVE DEVELOPER",
+        "facebook_url": "facebook.com/jane",
+        "email": "jane@gmail.com"
+    },
+    {
+        "member": "member2",
+        "name": "Kevin",
+        "role": "UI/UX INTERACTIVE DEVELOPER",
+        "facebook_url": "face.com",
+        "email": "wkwk@gmail.com"
+    },
+    {
+        "member": "member3",
+        "name": "John",
+        "role": "FRONT-END DEVELOPER",
+        "facebook_url": "dk.com",
+        "email": "kssksk@gmail.com"
+    },
+    {
+        "member": "member4",
+        "name": "qwerty",
+        "role": "BACK-END DEVELOPER",
+        "facebook_url": "facebook.com",
+        "email": "wen@gmail.com"
+    }
+
+]
