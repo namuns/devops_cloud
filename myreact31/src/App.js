@@ -13,8 +13,9 @@ function App() {
 
   return (
     <div>
-      {members.map((member) => {
-        if (pageName === member.member) {
+      {members.map((member, index) => {
+        const className = `member${(index % 4) + 1}`;
+        if (pageName === member.memberNo) {
           return (
             <ProfileCard
               name={member.name}
@@ -22,6 +23,7 @@ function App() {
               facebook_url={member.facebook_url}
               email={member.email}
               profileImage={profileImage1}
+              className={className}
               changePageName={setPageName}
             />
           );

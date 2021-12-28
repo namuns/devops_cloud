@@ -1,4 +1,3 @@
-import profileImage from "../img/member1.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faStickyNote } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,9 +8,10 @@ function ProfileCard({
   facebook_url,
   email,
   changePageName,
+  className,
 }) {
   return (
-    <div>
+    <div className={className}>
       <h2>Profile Card</h2>
       <>
         <section>
@@ -24,7 +24,7 @@ function ProfileCard({
             </a>
           </nav>
           <article className="profile">
-            <img src={profileImage} alt="프로필 이미지" />
+            <img src={"/src/img/member1.jpg"} alt="프로필 이미지" />
             <h1>{name}</h1>
             <h2>{role}</h2>
             <a href="#" className="btnView">
