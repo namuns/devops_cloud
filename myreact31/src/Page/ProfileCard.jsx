@@ -42,18 +42,13 @@ function ProfileCard({
             </li>
           </ul>
           <nav className="others">
-            <li>
-              <a onClick={() => changePageName("about")}></a>
-            </li>
-            <li>
-              <a onClick={() => changePageName("counter")}></a>
-            </li>
-            <li>
-              <a onClick={() => changePageName("lotto")}></a>
-            </li>
-            <li>
-              <a onClick={() => changePageName("playlist")}></a>
-            </li>
+            <a onClick={() => changePageName("member1")}></a>
+
+            <a onClick={() => changePageName("member2")}></a>
+
+            <a onClick={() => changePageName("member3")}></a>
+
+            <a onClick={() => changePageName("member4")}></a>
           </nav>
         </section>
       </>
