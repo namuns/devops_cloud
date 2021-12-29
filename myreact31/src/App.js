@@ -1,31 +1,50 @@
 import PageLotto from "./Page/PageLotto";
-import { useState } from "react";
+// import { useState } from "react";
 import ProfileCard from "./Page/ProfileCard";
 import "./Page/ProfileCard.css";
-import members from "./Page/memberInfo.json";
-
-const memberNoList = members.map(({ memberNo }) => memberNo);
+import Axios from "axios";
+const { useState, useEffect } = require("react");
 
 function App() {
-  const [pageName, setPageName] = useState(memberNoList[0]);
+  const [profileList, setProfileList] = useState([]);
+
+  useEffect(() => {
+    Axios.get(
+      "https://classdevopscloud.blob.core.windows.net/data/profile-list.json"
+    )
+      .then((response) => {
+        // reponse는 axios 객체
+        // response.data => 응답 내용
+        setProfileList(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const [pageName, setPageName] = useState("진");
 
   return (
     <div>
-      {members.map((member, index) => {
+      {profileList.map((member, index) => {
         // const className = memberNoList[(index % 4) + 1];
         const className = `member${(index % 4) + 1}`;
-        if (pageName === member.memberNo) {
+        if (pageName === member.name) {
           return (
             <ProfileCard
-              memberNo={member.memberNo}
               name={member.name}
               role={member.role}
-              facebook_url={member.facebook_url}
-              email={member.email}
-              className={className}
+              mbti={member.mbti}
+              instagram_url={member.instagram_url}
+              profile_image_url={member.profile_image_url}
             >
-              {memberNoList.map((id) => {
-                return <a onClick={() => setPageName(id)}></a>;
+              {profileList.map((member) => {
+                return (
+                  <a
+                    className={pageName == member.name ? "on" : ""}
+                    onClick={() => setPageName(member.name)}
+                  ></a>
+                );
               })}
             </ProfileCard>
           );
