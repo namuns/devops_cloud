@@ -2,13 +2,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faStickyNote } from "@fortawesome/free-solid-svg-icons";
 
 function ProfileCard({
-  profileImage,
+  memberNo,
   name,
   role,
   facebook_url,
   email,
-  changePageName,
   className,
+  children,
 }) {
   return (
     <div className={className}>
@@ -24,7 +24,7 @@ function ProfileCard({
             </a>
           </nav>
           <article className="profile">
-            <img src={"/src/img/member1.jpg"} alt="프로필 이미지" />
+            <img src={`/profile-images/${memberNo}.jpg`} alt="프로필 이미지" />
             <h1>{name}</h1>
             <h2>{role}</h2>
             <a href="#" className="btnView">
@@ -41,15 +41,7 @@ function ProfileCard({
               <span>{email}</span>
             </li>
           </ul>
-          <nav className="others">
-            <a onClick={() => changePageName("member1")}></a>
-
-            <a onClick={() => changePageName("member2")}></a>
-
-            <a onClick={() => changePageName("member3")}></a>
-
-            <a onClick={() => changePageName("member4")}></a>
-          </nav>
+          <nav className="others">{children}</nav>
         </section>
       </>
     </div>
