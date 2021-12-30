@@ -5,6 +5,10 @@ function PageProfile() {
   const [profileList, setProfileList] = useState([]);
 
   useEffect(() => {
+    handleRefresh();
+  }, []);
+
+  const handleRefresh = () => {
     Axios.get(
       'https://classdevopscloud.blob.core.windows.net/data/profile-list.json',
     )
@@ -22,10 +26,16 @@ function PageProfile() {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  };
+
+  const clearProfile = () => {
+    setProfileList([]);
+  };
 
   return (
     <div>
+      <button onClick={clearProfile}>Clear</button>
+      <button onClick={handleRefresh}>Refresh</button>
       {profileList.length === 0 && <h3>등록된 프로필이 없습니다.</h3>}
       {profileList.map((bts) => {
         return (
