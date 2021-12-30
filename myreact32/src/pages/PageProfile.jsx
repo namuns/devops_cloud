@@ -3,12 +3,15 @@ import Axios from 'axios';
 
 function PageProfile() {
   const [profileList, setProfileList] = useState([]);
+  const [error, setError] = useState(null);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
     handleRefresh();
   }, []);
 
   const handleRefresh = () => {
+    setError(null);
     Axios.get(
       'https://classdevopscloud.blob.core.windows.net/data/profile-list.json',
     )
@@ -25,6 +28,7 @@ function PageProfile() {
       })
       .catch((error) => {
         console.error(error);
+        setError(error);
       });
   };
 
@@ -32,25 +36,56 @@ function PageProfile() {
     setProfileList([]);
   };
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    console.log(value);
+  };
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      // Enter 키를 입력했습니다.
+      console.log('ENTER');
+      const value = e.target.value;
+      setQuery(value);
+    }
+  };
+
   return (
     <div>
       <button onClick={clearProfile}>Clear</button>
       <button onClick={handleRefresh}>Refresh</button>
       {profileList.length === 0 && <h3>등록된 프로필이 없습니다.</h3>}
-      {profileList.map((bts) => {
-        return (
-          <div key={bts.uniqueId}>
-            <ul>
-              <img src={bts.profileImageUrl} alt="프로필 이미지" />
-              <h3>{bts.name}</h3>
-              <li>{bts.uniqueId}</li>
-              <li>{bts.role}</li>
-              <li>{bts.mbti}</li>
-              <li>{bts.instagramUrl}</li>
-            </ul>
-          </div>
-        );
-      })}
+      {error !== null && (
+        <h3>조회 시에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.</h3>
+      )}
+      <input
+        type="text"
+        placeholder="검색어를 입력해주세요."
+        onChange={handleChange}
+        onKeyPress={handleKeyPress}
+      />
+      {profileList
+        .filter(
+          (bts) =>
+            bts.name.includes(query) ||
+            bts.role.includes(query) ||
+            bts.mbti.includes(query) ||
+            query == '',
+        )
+
+        .map((bts) => {
+          return (
+            <div key={bts.uniqueId}>
+              <ul>
+                <img src={bts.profileImageUrl} alt="프로필 이미지" />
+                <h3>{bts.name}</h3>
+                <li>{bts.uniqueId}</li>
+                <li>{bts.role}</li>
+                <li>{bts.mbti}</li>
+                <li>{bts.instagramUrl}</li>
+              </ul>
+            </div>
+          );
+        })}
     </div>
   );
 }
