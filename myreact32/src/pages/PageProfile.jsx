@@ -3,14 +3,12 @@ import Axios from 'axios';
 
 function PageProfile() {
   const [profileList, setProfileList] = useState([]);
-  const [profileData, setProfileData] = useState([]);
   const [error, setError] = useState(null);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
-    // handleRefresh();
-    setProfileList(profileData);
-  }, [profileData]);
+    handleRefresh();
+  }, []);
 
   const handleRefresh = () => {
     setError(null);
@@ -26,7 +24,7 @@ function PageProfile() {
           profileImageUrl: bts.profile_image_url,
           instagramUrl: bts.instagram_url,
         }));
-        setProfileData(axiosProfileList);
+        setProfileList(axiosProfileList);
       })
       .catch((error) => {
         console.error(error);
@@ -41,25 +39,16 @@ function PageProfile() {
   const handleChange = (e) => {
     const value = e.target.value;
     console.log(value);
-    setQuery(value);
   };
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      query &&
-        setProfileList(
-          profileData.filter((profile) => {
-            const data = Object.values(profile);
-            let state = '';
-            for (const info of data) {
-              if (info.includes(query)) {
-                state = 'true';
-              }
-            }
-            return state === 'true' ? true : false;
-          }),
-        );
+      // Enter 키를 입력했습니다.
+      console.log('ENTER');
+      const value = e.target.value;
+      setQuery(value);
     }
   };
+
   return (
     <div>
       <button onClick={clearProfile}>Clear</button>
@@ -74,20 +63,30 @@ function PageProfile() {
         onChange={handleChange}
         onKeyPress={handleKeyPress}
       />
-      {profileList.map((bts) => {
-        return (
-          <div key={bts.uniqueId}>
-            <ul>
-              <img src={bts.profileImageUrl} alt="프로필 이미지" />
-              <h3>{bts.name}</h3>
-              <li>{bts.uniqueId}</li>
-              <li>{bts.role}</li>
-              <li>{bts.mbti}</li>
-              <li>{bts.instagramUrl}</li>
-            </ul>
-          </div>
-        );
-      })}
+      {profileList
+        .filter((bts) => {
+          if (query.length === 0) {
+            return true;
+          }
+          const pattern = new RegExp(query, 'i');
+          const queryTarget = [bts.name, bts.role, bts.mbti];
+          return pattern.test(queryTarget);
+        })
+
+        .map((bts) => {
+          return (
+            <div key={bts.uniqueId}>
+              <ul>
+                <img src={bts.profileImageUrl} alt="프로필 이미지" />
+                <h3>{bts.name}</h3>
+                <li>{bts.uniqueId}</li>
+                <li>{bts.role}</li>
+                <li>{bts.mbti}</li>
+                <li>{bts.instagramUrl}</li>
+              </ul>
+            </div>
+          );
+        })}
     </div>
   );
 }
