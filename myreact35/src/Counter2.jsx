@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useReducer } from "react";
 
-function reducer(action, prevState) {
+function reducer(prevState, action) {
   const { type, amount, color } = action;
   if (type === "COUNT") {
     return { ...prevState, value: prevState.value + amount };
@@ -11,42 +11,44 @@ function reducer(action, prevState) {
 }
 
 function Counter() {
-  const [state, setState] = useState({ value: 0, color: "red" });
+  const [state, dispatch] = useReducer(reducer, { value: 0, color: "red" });
   const { value, color } = state;
 
   const handlePlus = () => {
-    const action = { type: "COUNT", amount: 1 };
-    setState((prevState) => {
-      return reducer(action, prevState);
-    });
+    // const action = { type: "COUNT", amount: 1 };
+    dispatch({ type: "COUNT", amount: 1 });
   };
 
   const handleMinus = () => {
-    const action = { type: "COUNT", amount: -1 };
-    setState((prevState) => {
-      return reducer(action, prevState);
-    });
+    // const action = { type: "COUNT", amount: -1 };
+    // setState((prevState) => {
+    //   return reducer(action, prevState);
+    // });
+    dispatch({ type: "COUNT", amount: -1 });
   };
 
   const handleGreen = () => {
-    const action = { type: "CHANGE_COLOR", color: "green" };
-    setState((prevState) => {
-      return reducer(action, prevState);
-    });
+    // const action = { type: "CHANGE_COLOR", color: "green" };
+    // setState((prevState) => {
+    //   return reducer(action, prevState);
+    // });
+    dispatch({ type: "CHANGE_COLOR", color: "green" });
   };
 
   const handleBlue = () => {
-    const action = { type: "CHANGE_COLOR", color: "blue" };
-    setState((prevState) => {
-      return reducer(action, prevState);
-    });
+    // const action = { type: "CHANGE_COLOR", color: "blue" };
+    // setState((prevState) => {
+    //   return reducer(action, prevState);
+    // });
+    dispatch({ type: "CHANGE_COLOR", color: "blue" });
   };
 
   const handleRed = () => {
-    const action = { type: "CHANGE_COLOR", color: "red" };
-    setState((prevState) => {
-      return reducer(action, prevState);
-    });
+    // const action = { type: "CHANGE_COLOR", color: "red" };
+    // setState((prevState) => {
+    //   return reducer(action, prevState);
+    // });
+    dispatch({ type: "CHANGE_COLOR", color: "red" });
   };
 
   return (
