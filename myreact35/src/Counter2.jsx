@@ -1,55 +1,54 @@
 import { useState } from "react";
 
+function reducer(action, prevState) {
+  const { type, amount, color } = action;
+  if (type === "COUNT") {
+    return { ...prevState, value: prevState.value + amount };
+  } else if (type === "CHANGE_COLOR") {
+    return { ...prevState, color: color };
+  }
+  return prevState;
+}
+
 function Counter() {
   const [state, setState] = useState({ value: 0, color: "red" });
   const { value, color } = state;
 
   const handlePlus = () => {
-    setState((prevState) => ({
-      ...prevState,
-      value: prevState.value + 1,
-    }));
+    const action = { type: "COUNT", amount: 1 };
+    setState((prevState) => {
+      return reducer(action, prevState);
+    });
   };
 
   const handleMinus = () => {
-    const otherState = (prevState) => {
-      return {
-        ...prevState,
-        value: prevState.value - 1,
-      };
-    };
-    setState(otherState);
+    const action = { type: "COUNT", amount: -1 };
+    setState((prevState) => {
+      return reducer(action, prevState);
+    });
   };
 
   const handleGreen = () => {
-    const otherState = (prevState) => {
-      return {
-        ...prevState,
-        color: "green",
-      };
-    };
-    setState(otherState);
+    const action = { type: "CHANGE_COLOR", color: "green" };
+    setState((prevState) => {
+      return reducer(action, prevState);
+    });
   };
 
   const handleBlue = () => {
-    const otherState = (prevState) => {
-      return {
-        ...prevState,
-        color: "blue",
-      };
-    };
-    setState(otherState);
+    const action = { type: "CHANGE_COLOR", color: "blue" };
+    setState((prevState) => {
+      return reducer(action, prevState);
+    });
   };
 
   const handleRed = () => {
-    const otherState = (prevState) => {
-      return {
-        ...prevState,
-        color: "red",
-      };
-    };
-    setState(otherState);
+    const action = { type: "CHANGE_COLOR", color: "red" };
+    setState((prevState) => {
+      return reducer(action, prevState);
+    });
   };
+
   return (
     <div>
       <h2>Counter</h2>
