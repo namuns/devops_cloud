@@ -1,46 +1,32 @@
 import { useReducer } from 'react';
 
-function reducer(prevState, action) {
-  const { type, color } = action;
-  if (type === 'generateNumbers') {
-    let numList = [];
-    for (let i = 1; i < 46; i++) {
-      numList.push(i);
-    }
-    const shuffledNumber = numList
-      .map((num_random) => ({
-        num_random,
-        value: Math.random(),
-      }))
-      .sort((obj_a, obj_b) => {
-        return obj_a.value - obj_b.value;
-      })
-      .map(({ num_random }) => {
-        return num_random;
-      })
-      .slice(0, 7);
-    return { number: shuffledNumber };
-  } else if (type === 'COLOR') {
-    return { prevState, color };
+const range = (size) => [...Array(size).keys()];
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'GENERATE_NUMBERS':
+      return { ...state, numbers: randomNumbers() };
+    default:
+      return state;
   }
+}
+
+function randomNumbers() {
+  const random_numbers = range(45)
+    .sort(() => Math.random() - Math.random())
+    .map((number) => number + 1)
+    .slice(0, 7);
+  return random_numbers;
 }
 
 function SevenNumbers() {
   const [state, dispatch] = useReducer(reducer, {
     numbers: [0, 0, 0, 0, 0, 0, 0],
-    colors: [
-      '#1B62BF',
-      '#1755A6',
-      '#37A647',
-      '#F29F05',
-      '#F23838',
-      'purple',
-      'pink',
-    ],
+    colors: ['pink'],
   });
 
   const generateNumbers = () => {
-    dispatch({ type: 'generateNumbers' });
+    dispatch({ type: 'GENERATE_NUMBERS' });
   };
 
   return (
@@ -49,14 +35,11 @@ function SevenNumbers() {
       <div>
         <button onClick={generateNumbers}>GENERATE_NUMBERS</button>
         <br />
-        {state.number &&
-          state.number.map((num) => {
-            return (
-              <div style={{ ...defaultStyle, backgroundColor: 'red' }}>
-                {num}
-              </div>
-            );
-          })}
+        {state.numbers.map((num) => {
+          return (
+            <div style={{ ...defaultStyle, backgroundColor: 'red' }}>{num}</div>
+          );
+        })}
       </div>
 
       <hr />
