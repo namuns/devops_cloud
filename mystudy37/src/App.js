@@ -1,10 +1,10 @@
-import PageTodoList from 'pages/PageTodolist';
+import PageReviewList from 'pages/PageReviewList';
 import './App.css';
 
 function App() {
   return (
     <div>
-      <PageTodoList />
+      <PageReviewList />
     </div>
   );
 }
