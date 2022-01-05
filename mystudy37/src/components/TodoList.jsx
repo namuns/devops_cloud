@@ -31,7 +31,7 @@ function TodoList() {
 
   return (
     <div>
-      <h2>Todo List</h2>
+      <h2 className="text-3xl font-bold underline">Todo List</h2>
 
       <input
         type="text"
