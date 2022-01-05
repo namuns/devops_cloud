@@ -12,8 +12,10 @@ const INITIAL_STATE = [
 
 function ReviewList() {
   const [reviewList, setReviewList] = useState(INITIAL_STATE);
-  const [fieldValues, handleChange] = useFieldValues();
-
+  const [fieldValues, handleChange, clearFieldValues] = useFieldValues({
+    content: '',
+    color: 'Orange',
+  });
   const removeReview = (reviewIndex) => {
     setReviewList((prevReviewList) =>
       prevReviewList.filter((_, index) => index !== reviewIndex),
@@ -23,11 +25,15 @@ function ReviewList() {
   return (
     <div className="review-List">
       <h2 className="text-3xl font-bold underline">Review List</h2>
-
-      <ReviewForm handleChange={handleChange} />
+      <ReviewForm fieldValues={fieldValues} handleChange={handleChange} />{' '}
       <hr />
       {JSON.stringify(fieldValues)}
-
+      <button
+        className="bg-red-500 text-gray-100 cursor-pointer"
+        onClick={() => clearFieldValues()}
+      >
+        clear
+      </button>
       {reviewList.map((review, index) => (
         <Review review={review} onClick={() => removeReview(index)} />
       ))}

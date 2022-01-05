@@ -1,4 +1,4 @@
-function ReviewForm({ handleChange }) {
+function ReviewForm({ fieldValues, handleChange }) {
   return (
     <div>
       <h2>ReviewForm</h2>
@@ -10,7 +10,7 @@ function ReviewForm({ handleChange }) {
         name="content"
       />
 
-      <select onChange={handleChange} name="color">
+      <select onChange={handleChange} name="color" value={fieldValues.color}>
         <option>Amber</option>
         <option>Orange</option>
         <option>Yellow</option>
